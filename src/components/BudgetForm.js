@@ -12,9 +12,8 @@ const BudgetForm = ({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h4>add item</h4>
         <div className="form-control">
-          <select onChange={handleType} value={type} className="">
+          <select onChange={handleType} value={type} className="select-option">
             <option defaultValue value="type">
               type
             </option>
@@ -33,7 +32,7 @@ const BudgetForm = ({
             value={description}
             onChange={handleDescription}
           />
-          <button type="submit">add</button>
+          <button type="submit">Tambahkan</button>
         </div>
       </form>
     </>

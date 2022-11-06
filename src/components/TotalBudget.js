@@ -1,11 +1,7 @@
 import React from "react";
 
 const TotalBudget = ({ totalBudget }) => {
-  return (
-    <div>
-      <h4>{totalBudget}</h4>
-    </div>
-  );
+  return <h3>Rp. {totalBudget}</h3>;
 };
 
 export default TotalBudget;

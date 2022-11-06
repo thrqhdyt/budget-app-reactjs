@@ -1,13 +1,241 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&display=swap");
+
+:root {
+  --bg: #e4f2f6;
+  --green: #43aa8b;
+  --red: #bc4749;
+  --color: #2f3e46;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Andika New Basic", sans-serif;
+  background-color: var(--bg);
+  color: var(--color);
+}
+
+.section-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+}
+
+h2 {
+  font-size: 34px;
+}
+
+.budget-total {
+  width: 70%;
+  max-width: 860px;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+
+.budget-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: white;
+  border-radius: 13px;
+}
+
+.income-number h3 {
+  color: var(--green);
+}
+
+.expense-number h3 {
+  color: var(--red);
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+}
+
+.select-option {
+  margin: 5px 0;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+input {
+  margin: 5px 0;
+  padding: 12px 20px;
+  font-size: 17px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+.form-control button {
+  background-color: var(--red);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 7px auto;
+  cursor: pointer;
+}
+
+.section-list {
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+  max-width: 1100px;
+}
+
+.list-income {
+  width: 48%;
+}
+
+.list-spent {
+  width: 48%;
+}
+
+.list-income h3 {
+  font-size: 30px;
+  color: var(--green);
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.list-spent h3 {
+  font-size: 30px;
+  color: var(--red);
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+article {
+  width: 100%;
+  display: flex;
+  background-color: white;
+  justify-content: space-between;
+  padding: 7px 40px 7px 30px;
+  border-radius: 15px;
+  margin: 5px 0;
+  align-items: center;
+  position: relative;
+}
+
+.income-amount {
+  color: var(--green);
+  font-size: 18px;
+}
+
+.expense-amount {
+  color: var(--red);
+  font-size: 18px;
+}
+
+.date {
+  font-size: 14px;
+  color: #6d828e;
+}
+
+.desc {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+article .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: var(--red);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  cursor: pointer;
+  border: none;
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+article:hover .btn {
+  animation: showDelete;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showDelete {
+  0% {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .budget-total {
+    margin-top: 5px;
+    width: 60%;
+    flex-direction: column;
+  }
+
+  .budget-number {
+    margin: 8px 0;
+  }
+
+  .form-control {
+    width: 300px;
+  }
+
+  .section-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list-income {
+    width: 95%;
+    margin-bottom: 30px;
+  }
+
+  .list-spent {
+    width: 95%;
+    margin-bottom: 20px;
+  }
+
+  .list-income h3 {
+    font-size: 24px;
+  }
+
+  .list-spent h3 {
+    font-size: 24px;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+
+  .desc {
+    font-size: 16px;
+  }
 }

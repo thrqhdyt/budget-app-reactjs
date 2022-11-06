@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import BudgetForm from "./components/BudgetForm";
 import BudgetList from "./components/BudgetList";
@@ -40,6 +40,7 @@ function App() {
         const newExpense = {
           id: new Date().getTime().toString(),
           amount: parseFloat(amount),
+          created: new Date().toLocaleDateString(),
           description: description,
           type: type,
         };
@@ -50,6 +51,7 @@ function App() {
         const newIncome = {
           id: new Date().getTime().toString(),
           amount: parseFloat(amount),
+          created: new Date().toLocaleDateString(),
           description: description,
           type: type,
         };
@@ -62,22 +64,32 @@ function App() {
     }
   };
 
+  const removeItem = (id, type) => {
+    if (type === "income") {
+      let filteredIncome = listIncome.filter((item) => item.id !== id);
+      setListIncome(filteredIncome);
+    } else {
+      let filteredExpense = listSpent.filter((item) => item.id !== id);
+      setListSpent(filteredExpense);
+    }
+  };
+
   return (
-    <section>
+    <section className="section-center">
       <h2>Budget App</h2>
-      <div>
-        <div>
-          <h3>Uang Masuk</h3>
+      <div className="budget-total">
+        <div className="budget-number income-number">
+          <h4>Uang Masuk</h4>
           <TotalBudget totalBudget={totalIncome} />
         </div>
-        <div>
-          <h3>Uang Keluar</h3>
+        <div className="budget-number expense-number">
+          <h4>Uang Keluar</h4>
           <TotalBudget totalBudget={totalExpense} />
         </div>
-      </div>
-      <div>
-        <h3>Sisa Uang</h3>
-        <TotalBudget totalBudget={totalAvailable} />
+        <div className="budget-number">
+          <h4>Sisa Uang</h4>
+          <TotalBudget totalBudget={totalAvailable} />
+        </div>
       </div>
 
       <BudgetForm
@@ -89,12 +101,17 @@ function App() {
         handleType={handleType}
         handleSubmit={handleSubmit}
       />
-      <div className="list-spent">
-        <BudgetList budgetItems={listSpent} />
-      </div>
-      <div className="list-income">
-        <BudgetList budgetItems={listIncome} />
-      </div>
+
+      <section className="section-list">
+        <div className="list-income">
+          <h3>Uang Masuk</h3>
+          <BudgetList budgetItems={listIncome} removeItem={removeItem} />
+        </div>
+        <div className="list-spent">
+          <h3>Uang Keluar</h3>
+          <BudgetList budgetItems={listSpent} removeItem={removeItem} />
+        </div>
+      </section>
     </section>
   );
 }
