@@ -1,15 +1,35 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import Alert from "./components/Alert";
 import BudgetForm from "./components/BudgetForm";
 import BudgetList from "./components/BudgetList";
 import TotalBudget from "./components/TotalBudget";
+
+const getIncome = () => {
+  let listIncome = localStorage.getItem("listIncome");
+  if (listIncome) {
+    return JSON.parse(localStorage.getItem("listIncome"));
+  } else {
+    return [];
+  }
+};
+
+const getSpent = () => {
+  let listSpent = localStorage.getItem("listSpent");
+  if (listSpent) {
+    return JSON.parse(localStorage.getItem("listSpent"));
+  } else {
+    return [];
+  }
+};
 
 function App() {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
-  const [listSpent, setListSpent] = useState([]);
-  const [listIncome, setListIncome] = useState([]);
+  const [listSpent, setListSpent] = useState(getSpent());
+  const [listIncome, setListIncome] = useState(getIncome());
+  const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
   const totalExpense = listSpent.reduce((total, currentTotal) => {
     return parseFloat((total += currentTotal.amount));
@@ -32,6 +52,14 @@ function App() {
   const handleType = (e) => {
     setType(e.target.value);
   };
+
+  useEffect(() => {
+    localStorage.setItem("listIncome", JSON.stringify(listIncome));
+  }, [listIncome]);
+
+  useEffect(() => {
+    localStorage.setItem("listSpent", JSON.stringify(listSpent));
+  }, [listSpent]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,9 +87,14 @@ function App() {
         setAmount("");
         setDescription("");
       }
+      showAlert(true, "success", "data berhasil ditambahkan");
     } else {
-      alert("Please input");
+      showAlert(true, "danger", "isi dulu bro...");
     }
+  };
+
+  const showAlert = (show = false, type = "", msg = "") => {
+    setAlert({ show, type, msg });
   };
 
   const removeItem = (id, type) => {
@@ -91,6 +124,14 @@ function App() {
           <TotalBudget totalBudget={totalAvailable} />
         </div>
       </div>
+
+      {alert.show && (
+        <Alert
+          {...alert}
+          removeAlert={showAlert}
+          list={{ listIncome, listSpent }}
+        />
+      )}
 
       <BudgetForm
         type={type}

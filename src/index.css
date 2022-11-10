@@ -27,6 +27,27 @@ body {
   padding-top: 30px;
 }
 
+.alert {
+  margin-bottom: 1rem;
+  display: grid;
+  width: 250px;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  padding: 5px;
+}
+
+.alert-danger {
+  color: #721c24;
+  background: #f8d7da;
+}
+
+.alert-success {
+  color: #155724;
+  background: #d4edda;
+}
+
 h2 {
   font-size: 34px;
 }

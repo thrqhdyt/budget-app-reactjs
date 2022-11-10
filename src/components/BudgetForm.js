@@ -17,12 +17,13 @@ const BudgetForm = ({
             <option defaultValue value="type">
               type
             </option>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
           </select>
           <input
             type="number"
             placeholder="jumlah"
+            min={0}
             value={amount}
             onChange={handleAmount}
           />
